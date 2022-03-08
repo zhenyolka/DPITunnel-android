@@ -12,9 +12,9 @@ Free, simple and serverless solution against censorship for Android
 <a href="https://github.com/zhenyolka/DPITunnel-android/releases"><img src="https://img.shields.io/github/downloads/zhenyolka/DPITunnel-android/total?style=flat-square" alt="Downloads"/></a>
 
 <br>
-<img src="assets/screenshot_1.png" alt="DPI Tunnel UI" height="210px" width="30%" />
-<img src="assets/screenshot_2.png" alt="DPI Tunnel UI" height="210px" width="30%" />
-<img src="assets/screenshot_3.png" alt="DPI Tunnel UI" height="210px" width="30%" />
+<img src="assets/screenshot_1.png" alt="DPI Tunnel UI" height="64.8%" width="30%" />
+<img src="assets/screenshot_2.png" alt="DPI Tunnel UI" height="64.8%" width="30%" />
+<img src="assets/screenshot_3.png" alt="DPI Tunnel UI" height="64.8%" width="30%" />
 </div>
 
 ### What is it
