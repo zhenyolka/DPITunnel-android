@@ -5,18 +5,21 @@
         <SwitchPreferenceCompat
             app:key="preference_start_on_boot"
             app:defaultValue="false"
+			app:singleLineTitle="false"
             app:title="@string/preference_start_on_boot_title"
             app:summary="@string/preference_start_on_boot_summary" />
 
         <SwitchPreferenceCompat
             app:key="preference_custom_ca_bundle"
             app:defaultValue="false"
+			app:singleLineTitle="false"
             app:title="@string/preference_custom_ca_bundle_title"
             app:summary="@string/preference_custom_ca_bundle_summary" />
 
         <Preference
             app:key="preference_ca_bundle_path"
             app:dependency="preference_custom_ca_bundle"
+			app:singleLineTitle="false"
             app:title="@string/preference_ca_bundle_path_title" />
 
     </PreferenceCategory>
@@ -26,12 +29,14 @@
         <EditTextPreference
             app:key="preference_proxy_ip"
             app:defaultValue="127.0.0.1"
+			app:singleLineTitle="false"
             app:title="@string/preference_proxy_ip_title"
             app:summary="@string/preference_proxy_ip_summary" />
 
         <EditTextPreference
             app:key="preference_proxy_port"
             app:defaultValue="8080"
+			app:singleLineTitle="false"
             app:title="@string/preference_proxy_port_title"
             app:summary="@string/preference_proxy_port_summary" />
 
