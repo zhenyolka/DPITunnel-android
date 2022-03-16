@@ -34,9 +34,14 @@
                 android:layout_height="wrap_content"
                 app:icon="@drawable/ic_settings_24dp"
                 android:text="@string/button_settings"
+				android:autoSizeTextType="uniform"
+				android:autoSizeMinTextSize="8sp"
+				android:autoSizeMaxTextSize="14sp"
+				android:maxLines="1"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+				tools:targetApi="o" />
 
             <ImageView
                 android:id="@+id/dashboard_status_card_image"
@@ -71,6 +76,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/dashboard_status_card_restart"
                 tools:text="@string/button_status_stop_text"
+				tools:autoSizeTextType="uniform"
+				tools:autoSizeMinTextSize="8sp"
+				tools:autoSizeMaxTextSize="14sp"
+				tools:maxLines="1"
                 tools:icon="@drawable/ic_stop_24" />
 
             <com.google.android.material.button.MaterialButton
@@ -80,11 +89,16 @@
                 android:theme="@style/Widget.AppCompat.Button"
                 android:layout_margin="@dimen/cardview_items_margin"
                 android:text="@string/button_restart"
+				android:autoSizeTextType="uniform"
+				android:autoSizeMinTextSize="8sp"
+				android:autoSizeMaxTextSize="14sp"
+				android:maxLines="1"
                 app:icon="@drawable/ic_restart_24dp"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                 app:layout_constraintTop_toBottomOf="@id/dashboard_status_card_image"
                 app:layout_constraintStart_toEndOf="@id/dashboard_status_card_start_stop"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+				tools:targetApi="o" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
