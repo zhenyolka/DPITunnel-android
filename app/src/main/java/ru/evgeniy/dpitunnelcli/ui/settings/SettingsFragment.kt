@@ -51,7 +51,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             val isValid = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 InetAddresses.isNumericAddress(newValue.toString())
             } else {
-                Patterns.IP_ADDRESS.matcher(newValue.toString()).matches()
+                Patterns.IP_ADDRESS.matcher(newValue.toString()).matches() || newValue.toString() == "0.0.0.0"
             }
             if (!isValid)
                 Toast.makeText(requireContext(), getString(R.string.preference_proxy_ip_invalid_ip), Toast.LENGTH_SHORT).show()
