@@ -2,11 +2,8 @@ package ru.evgeniy.dpitunnelcli.ui.settings
 
 import android.app.Activity
 import android.content.Intent
-import android.net.InetAddresses
-import android.os.Build
 import android.os.Bundle
 import android.text.InputType
-import android.util.Patterns
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.preference.EditTextPreference
@@ -15,8 +12,10 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import ru.evgeniy.dpitunnelcli.R
 import ru.evgeniy.dpitunnelcli.preferences.AppPreferences
+import ru.evgeniy.dpitunnelcli.ui.activity.customIPs.CustomIPsActivity
 import ru.evgeniy.dpitunnelcli.utils.Constants
 import ru.evgeniy.dpitunnelcli.utils.MinMaxFilter
+import ru.evgeniy.dpitunnelcli.utils.Utils
 import java.io.File
 import java.io.FileNotFoundException
 
@@ -48,11 +47,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         val proxyIP = findPreference<EditTextPreference>("preference_proxy_ip")
         proxyIP!!.setOnPreferenceChangeListener { _, newValue ->
-            val isValid = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                InetAddresses.isNumericAddress(newValue.toString())
-            } else {
-                Patterns.IP_ADDRESS.matcher(newValue.toString()).matches() || newValue.toString() == "0.0.0.0"
-            }
+            val isValid = Utils.validateIp(newValue.toString())
             if (!isValid)
                 Toast.makeText(requireContext(), getString(R.string.preference_proxy_ip_invalid_ip), Toast.LENGTH_SHORT).show()
             isValid
@@ -62,6 +57,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
         proxyPort!!.setOnBindEditTextListener {
             it.inputType = InputType.TYPE_CLASS_NUMBER
             it.filters = arrayOf(MinMaxFilter(Constants.SERVER_PORT_RANGE))
+        }
+
+        val customIPs = findPreference<Preference>("preference_dns_custom_ips")
+        customIPs!!.setOnPreferenceClickListener {
+            val intent = Intent(context, CustomIPsActivity::class.java)
+            startActivity(intent)
+            true
         }
     }
 

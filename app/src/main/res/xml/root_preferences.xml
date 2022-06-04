@@ -49,4 +49,14 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/preference_category_dns">
+
+        <Preference
+            app:key="preference_dns_custom_ips"
+            app:singleLineTitle="false"
+            app:title="@string/preference_dns_custom_ips_title"
+            app:summary="@string/preference_dns_custom_ips_summary" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

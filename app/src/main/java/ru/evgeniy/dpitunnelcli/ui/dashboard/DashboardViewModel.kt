@@ -70,7 +70,8 @@ class DashboardViewModel(private val daemonUseCase: IDaemonUseCase,
                             CliDaemon.PersistentOptions(
                                 caBundlePath = settingsUseCase.getCABundlePath()!!,
                                 ip = settingsUseCase.getIP(),
-                                port = settingsUseCase.getPort()
+                                port = settingsUseCase.getPort(),
+                                customIPsPath = settingsUseCase.getCustomIPsPath()
                             ),
                             it
                         )
@@ -100,7 +101,8 @@ class DashboardViewModel(private val daemonUseCase: IDaemonUseCase,
                             CliDaemon.PersistentOptions(
                                 caBundlePath = settingsUseCase.getCABundlePath()!!,
                                 ip = settingsUseCase.getIP(),
-                                port = settingsUseCase.getPort()
+                                port = settingsUseCase.getPort(),
+                                customIPsPath = settingsUseCase.getCustomIPsPath()
                             ),
                             it
                         )

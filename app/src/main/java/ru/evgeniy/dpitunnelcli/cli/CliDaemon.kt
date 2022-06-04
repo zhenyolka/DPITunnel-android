@@ -41,13 +41,15 @@ class CliDaemon(private val execPath: String,
     data class PersistentOptions(
         val caBundlePath: String,
         val ip: String?,
-        val port: Int?
+        val port: Int?,
+        val customIPsPath: String?
     ) {
         override fun toString(): String {
             val stringBuilder = StringBuilder()
             stringBuilder.append("--daemon --ca-bundle-path \"${this.caBundlePath}\"")
             ip?.let { stringBuilder.append(" --ip $it") }
             port?.let { stringBuilder.append(" --port $it") }
+            customIPsPath?.let { stringBuilder.append(" --custom-ips \"$it\"") }
             return stringBuilder.toString()
         }
     }

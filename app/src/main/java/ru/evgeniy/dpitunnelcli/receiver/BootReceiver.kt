@@ -30,7 +30,8 @@ class BootReceiver: BroadcastReceiver() {
                         CliDaemon.PersistentOptions(
                             caBundlePath = settingsUseCase.getCABundlePath()!!,
                             ip = settingsUseCase.getIP(),
-                            port = settingsUseCase.getPort()
+                            port = settingsUseCase.getPort(),
+                            customIPsPath = settingsUseCase.getCustomIPsPath()
                         ),
                         fetchAllProfilesUseCase.fetch()
                     )

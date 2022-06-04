@@ -6,6 +6,7 @@ interface ISettingsUseCase {
     fun getSystemWide(): Boolean
     fun getIP(): String?
     fun getPort(): Int?
+    fun getCustomIPsPath(): String?
     fun getDefaultProfileId(): Long?
     fun setDefaultProfileId(value: Long?)
 }

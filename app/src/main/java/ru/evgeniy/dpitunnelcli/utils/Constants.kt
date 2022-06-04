@@ -15,6 +15,7 @@ object Constants {
     const val DPITUNNEL_DAEMON_PID_FILE = "/dev/dpitunnel-cli-daemon.pid"
     const val INBUILT_CA_BUNDLE_FILE_NAME = "ca.bundle"
     const val USER_CA_BUNDLE_FILE_NAME = "ca.bundle_user"
+    const val CUSTOM_IPS_FILENAME = "custom-ips.txt"
     val DEFAULT_PROFILE = Profile(
         id = null,
         enabled = false,

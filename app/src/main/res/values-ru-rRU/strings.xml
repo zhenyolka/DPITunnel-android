@@ -6,6 +6,7 @@
     <string name="title_dashboard">Мониторинг</string>
     <string name="title_activity_edit_profile">Добавить профиль</string>
     <string name="title_activity_settings">Настройки</string>
+    <string name="title_activity_custom_ips">Переопределение IP</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="next">Далее</string>
@@ -102,6 +103,25 @@
     <string name="config_parse_failed">Ошибка! Не удалось разобрать вывод программы. Свяжитесь с разработчиком</string>
     <string name="profile_successfully_configured">Настройки успешно подобраны</string>
 
+    <!-- Custom IPs activity -->
+    <!-- Toolbar -->
+    <string name="save_custom_ips_toolbar">Сохранить</string>
+    <!-- Dialogs -->
+    <string name="dialog_custom_ip_edit_domain_positive">ОК</string>
+    <string name="dialog_custom_ip_edit_domain_negative">Отмена</string>
+    <string name="dialog_custom_ip_edit_domain_title">Домен</string>
+    <string name="dialog_custom_ip_edit_domain_invalid_domain">Некорректный домен</string>
+    <string name="dialog_custom_ip_edit_ip_positive">ОК</string>
+    <string name="dialog_custom_ip_edit_ip_negative">Отмена</string>
+    <string name="dialog_custom_ip_edit_ip_title">IP</string>
+    <string name="dialog_custom_ip_edit_ip_invalid_ip">Некорректный IP</string>
+    <!-- Exit confirmation dialog -->
+    <string name="title_confirmation_custom_ips_dialog">Несохранённые изменения</string>
+    <string name="message_confirmation_custom_ips_dialog">Сохранить?</string>
+    <string name="save_confirmation_custom_ips_dialog">Сохранить</string>
+    <string name="discard_confirmation_custom_ips_dialog">Не сохранять</string>
+    <string name="cancel_confirmation_custom_ips_dialog">Отменить</string>
+
     <!-- Preferences -->
     <!-- General -->
     <string name="preference_category_general">Общее</string>
@@ -119,4 +139,8 @@
     <string name="preference_proxy_port_title">Порт прокси</string>
     <string name="preference_proxy_port_summary">Порт для запуска прокси сервера. Пр. 8080</string>
     <string name="preference_proxy_ip_invalid_ip">Неверный IP адрес</string>
+    <!-- DNS -->
+    <string name="preference_category_dns">DNS</string>
+    <string name="preference_dns_custom_ips_title">Переопределение IP</string>
+    <string name="preference_dns_custom_ips_summary">Позволяет переопределить IP для определённых доменов, игнорируя ответы DNS/DoH. Полезно для крупных заблокированных сайтов</string>
 </resources>

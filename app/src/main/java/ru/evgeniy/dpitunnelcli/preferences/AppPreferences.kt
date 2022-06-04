@@ -2,12 +2,14 @@ package ru.evgeniy.dpitunnelcli.preferences
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.content.res.Resources
 import androidx.preference.PreferenceManager
 import ru.evgeniy.dpitunnelcli.R
+import ru.evgeniy.dpitunnelcli.utils.Constants
+import java.io.File
 
 class AppPreferences private  constructor() {
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var customIPsFilePath: String
 
     val startOnBoot: Boolean
         get() = sharedPreferences.getBoolean(START_ON_BOOT_PROPERTY_NAME, false)
@@ -29,6 +31,14 @@ class AppPreferences private  constructor() {
 
     val port: Int?
         get() = sharedPreferences.getString(PORT_PROPERTY_NAME, "")?.ifEmpty { null }?.toIntOrNull()
+
+    val customIPsPath: String?
+        get() = File(customIPsFilePath).let {
+            if (it.exists())
+                customIPsFilePath
+            else
+                null
+        }
 
     val firstRun: Boolean
         get() {
@@ -60,12 +70,13 @@ class AppPreferences private  constructor() {
         private const val DEFAULT_PROFILE_ID_PROPERTY_NAME = "default_profile_id"
 
         fun setDefaults(context: Context) {
-            PreferenceManager.setDefaultValues(context, SETTINGS_STORAGE_NAME, Context.MODE_PRIVATE, R.xml.root_preferences, false);
+            PreferenceManager.setDefaultValues(context, SETTINGS_STORAGE_NAME, Context.MODE_PRIVATE, R.xml.root_preferences, false)
         }
 
         fun getInstance(context: Context): AppPreferences {
             val instance = AppPreferences()
             instance.sharedPreferences = context.getSharedPreferences(SETTINGS_STORAGE_NAME, Context.MODE_PRIVATE)
+            instance.customIPsFilePath = context.filesDir.absolutePath + "/${Constants.CUSTOM_IPS_FILENAME}"
             return instance
         }
     }
