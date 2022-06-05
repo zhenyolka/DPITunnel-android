@@ -47,6 +47,18 @@
             </intent-filter>
         </receiver>
 
+        <service
+            android:name=".service.SwitchTileService"
+            android:icon="@drawable/ic_quick_tile"
+            android:label="@string/tile_enable_disable"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:exported="true">
+            <intent-filter>
+                <action
+                    android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".ui.activity.customIPs.CustomIPsActivity"
             android:exported="false"

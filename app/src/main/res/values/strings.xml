@@ -8,6 +8,9 @@
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_custom_ips">Custom IPs</string>
 
+    <!-- Tile -->
+    <string name="tile_enable_disable">DPI Tunnel</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="next">Next</string>
     <string name="previous">Previous</string>

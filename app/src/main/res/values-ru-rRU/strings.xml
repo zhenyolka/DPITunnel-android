@@ -8,6 +8,9 @@
     <string name="title_activity_settings">Настройки</string>
     <string name="title_activity_custom_ips">Переопределение IP</string>
 
+    <!-- Tile -->
+    <string name="tile_enable_disable">DPI Tunnel</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="next">Далее</string>
     <string name="previous">Назад</string>

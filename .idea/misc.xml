@@ -17,9 +17,12 @@
         <entry key="app/src/main/res/drawable/ic_edit_black_24dp.xml" value="0.175" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.19" />
         <entry key="app/src/main/res/drawable/ic_launcher_background_round.xml" value="0.164" />
+        <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.197" />
         <entry key="app/src/main/res/drawable/ic_launcher_foreground_monochrome.xml" value="0.164" />
         <entry key="app/src/main/res/drawable/ic_more_vert_24dp.xml" value="0.164" />
         <entry key="app/src/main/res/drawable/ic_more_vert_black_24dp.xml" value="0.19" />
+        <entry key="app/src/main/res/drawable/ic_quick_tile.xml" value="0.1715" />
+        <entry key="app/src/main/res/drawable/ic_quick_tile_24dp.xml" value="0.197" />
         <entry key="app/src/main/res/drawable/ic_save_24.xml" value="0.197" />
         <entry key="app/src/main/res/drawable/ic_save_black_24dp.xml" value="0.19" />
         <entry key="app/src/main/res/drawable/ic_save_white_24dp.xml" value="0.19" />
