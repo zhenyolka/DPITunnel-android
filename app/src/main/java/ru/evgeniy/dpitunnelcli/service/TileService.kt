@@ -11,21 +11,21 @@ import ru.evgeniy.dpitunnelcli.R
 import ru.evgeniy.dpitunnelcli.cli.CliDaemon
 import ru.evgeniy.dpitunnelcli.data.usecases.DaemonUseCase
 import ru.evgeniy.dpitunnelcli.data.usecases.FetchAllProfilesUseCase
+import ru.evgeniy.dpitunnelcli.data.usecases.ProxyUseCase
 import ru.evgeniy.dpitunnelcli.data.usecases.SettingsUseCase
-import ru.evgeniy.dpitunnelcli.domain.usecases.DaemonState
-import ru.evgeniy.dpitunnelcli.domain.usecases.IDaemonUseCase
-import ru.evgeniy.dpitunnelcli.domain.usecases.IFetchAllProfilesUseCase
-import ru.evgeniy.dpitunnelcli.domain.usecases.ISettingsUseCase
+import ru.evgeniy.dpitunnelcli.domain.usecases.*
 import ru.evgeniy.dpitunnelcli.utils.Constants
 
 
 @RequiresApi(Build.VERSION_CODES.N)
 class SwitchTileService: TileService() {
 
+    private var lastDaemonState: DaemonState? = null
     private var coroutineScope: CoroutineScope? = null
     private lateinit var fetchAllProfilesUseCase: IFetchAllProfilesUseCase
     private lateinit var settingsUseCase: ISettingsUseCase
     private lateinit var daemonUseCase: IDaemonUseCase
+    private lateinit var proxyUseCase: IProxyUseCase
 
     override fun onCreate() {
         super.onCreate()
@@ -34,6 +34,7 @@ class SwitchTileService: TileService() {
         daemonUseCase = DaemonUseCase(
             execPath = this.applicationInfo.nativeLibraryDir + '/' + Constants.DPITUNNEL_BINARY_NAME,
             pidFilePath = Constants.DPITUNNEL_DAEMON_PID_FILE)
+        proxyUseCase = ProxyUseCase()
     }
 
     override fun onStartListening() {
@@ -41,14 +42,29 @@ class SwitchTileService: TileService() {
         coroutineScope?.cancel()
         coroutineScope = CoroutineScope(Job() + Dispatchers.Main.immediate).apply {
             launch(CoroutineName("SwitchTileService.DaemonStateFlow")) {
-                daemonUseCase.daemonState.collect {
+                daemonUseCase.daemonState.collect { state ->
+                    when(state) {
+                        is DaemonState.Loading -> {}
+                        is DaemonState.Running -> {
+                            if (lastDaemonState is DaemonState.Stopped || lastDaemonState is DaemonState.Error)
+                                if (settingsUseCase.getSystemWide())
+                                    proxyUseCase.set("127.0.0.1", settingsUseCase.getPort() ?: Constants.DPITUNNEL_DEFAULT_PORT, settingsUseCase.getProxyMode()!!)
+                        }
+                        is DaemonState.Stopped -> {
+                            if (lastDaemonState is DaemonState.Running)
+                                if (settingsUseCase.getSystemWide())
+                                    proxyUseCase.unset(settingsUseCase.getProxyMode()!!)
+                        }
+                        is DaemonState.Error -> {}
+                    }
+                    lastDaemonState = state
                     updateTile()
                 }
             }
             launch(CoroutineName("SwitchTileService.DaemonStateCheck")) {
                 while (true) {
                     daemonUseCase.check()
-                    delay(2000)
+                    delay(1000)
                 }
             }
         }
@@ -75,7 +91,8 @@ class SwitchTileService: TileService() {
                                 caBundlePath = settingsUseCase.getCABundlePath()!!,
                                 ip = settingsUseCase.getIP(),
                                 port = settingsUseCase.getPort(),
-                                customIPsPath = settingsUseCase.getCustomIPsPath()
+                                customIPsPath = settingsUseCase.getCustomIPsPath(),
+                                proxyMode = settingsUseCase.getProxyMode()!!
                             ),
                             it
                         )
