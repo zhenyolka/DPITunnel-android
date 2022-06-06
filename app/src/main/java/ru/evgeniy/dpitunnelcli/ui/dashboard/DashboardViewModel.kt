@@ -35,13 +35,13 @@ class DashboardViewModel(private val daemonUseCase: IDaemonUseCase,
                         _uiState.postValue(UIState.Running)
                         if (lastDaemonState is DaemonState.Stopped || lastDaemonState is DaemonState.Error)
                             if (settingsUseCase.getSystemWide())
-                                proxyUseCase.set("127.0.0.1", settingsUseCase.getPort() ?: Constants.DPITUNNEL_DEFAULT_PORT, settingsUseCase.getProxyMode()!!)
+                                proxyUseCase.set("127.0.0.1", settingsUseCase.getPort() ?: Constants.DPITUNNEL_DEFAULT_PORT, settingsUseCase.getProxyMode() ?: Constants.DPITUNNEL_DEFAULT_PROXY_MODE)
                     }
                     is DaemonState.Stopped -> {
                         _uiState.postValue(UIState.Stopped)
                         if (lastDaemonState is DaemonState.Running)
                             if (settingsUseCase.getSystemWide())
-                                proxyUseCase.unset(settingsUseCase.getProxyMode()!!)
+                                proxyUseCase.unset(settingsUseCase.getProxyMode() ?: Constants.DPITUNNEL_DEFAULT_PROXY_MODE)
                     }
                     is DaemonState.Error -> {
                         _uiState.postValue(UIState.Stopped)
@@ -72,7 +72,7 @@ class DashboardViewModel(private val daemonUseCase: IDaemonUseCase,
                                 ip = settingsUseCase.getIP(),
                                 port = settingsUseCase.getPort(),
                                 customIPsPath = settingsUseCase.getCustomIPsPath(),
-                                proxyMode = settingsUseCase.getProxyMode()!!
+                                proxyMode = settingsUseCase.getProxyMode() ?: Constants.DPITUNNEL_DEFAULT_PROXY_MODE
                             ),
                             it
                         )
@@ -104,7 +104,7 @@ class DashboardViewModel(private val daemonUseCase: IDaemonUseCase,
                                 ip = settingsUseCase.getIP(),
                                 port = settingsUseCase.getPort(),
                                 customIPsPath = settingsUseCase.getCustomIPsPath(),
-                                proxyMode = settingsUseCase.getProxyMode()!!
+                                proxyMode = settingsUseCase.getProxyMode() ?: Constants.DPITUNNEL_DEFAULT_PROXY_MODE
                             ),
                             it
                         )

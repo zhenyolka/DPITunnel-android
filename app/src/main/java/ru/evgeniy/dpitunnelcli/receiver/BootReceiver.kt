@@ -32,7 +32,7 @@ class BootReceiver: BroadcastReceiver() {
                             ip = settingsUseCase.getIP(),
                             port = settingsUseCase.getPort(),
                             customIPsPath = settingsUseCase.getCustomIPsPath(),
-                            proxyMode = settingsUseCase.getProxyMode()!!
+                            proxyMode = settingsUseCase.getProxyMode() ?: Constants.DPITUNNEL_DEFAULT_PROXY_MODE
                         ),
                         fetchAllProfilesUseCase.fetch()
                     )
@@ -50,9 +50,9 @@ class BootReceiver: BroadcastReceiver() {
                     }
                     if (settingsUseCase.getSystemWide()) {
                         if (isStarted)
-                            proxyUseCase.set("127.0.0.1", settingsUseCase.getPort() ?: Constants.DPITUNNEL_DEFAULT_PORT, settingsUseCase.getProxyMode()!!)
+                            proxyUseCase.set("127.0.0.1", settingsUseCase.getPort() ?: Constants.DPITUNNEL_DEFAULT_PORT, settingsUseCase.getProxyMode() ?: Constants.DPITUNNEL_DEFAULT_PROXY_MODE)
                         else
-                            proxyUseCase.unset(settingsUseCase.getProxyMode()!!)
+                            proxyUseCase.unset(settingsUseCase.getProxyMode() ?: Constants.DPITUNNEL_DEFAULT_PROXY_MODE)
                     }
                 }
             }

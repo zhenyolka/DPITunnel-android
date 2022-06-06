@@ -3,6 +3,7 @@ package ru.evgeniy.dpitunnelcli.utils
 import ru.evgeniy.dpitunnelcli.domain.entities.DesyncFirstAttack
 import ru.evgeniy.dpitunnelcli.domain.entities.DesyncZeroAttack
 import ru.evgeniy.dpitunnelcli.domain.entities.Profile
+import ru.evgeniy.dpitunnelcli.domain.entities.ProxyMode
 
 object Constants {
     val TTL_VALUE_RANGE = 1..255
@@ -11,6 +12,7 @@ object Constants {
     val SPLIT_POSITION_VALUE_RANGE = 1..65535
     val SERVER_PORT_RANGE = 1..65535
     const val DPITUNNEL_DEFAULT_PORT = 8080
+    val DPITUNNEL_DEFAULT_PROXY_MODE = ProxyMode.HTTP
     const val DPITUNNEL_BINARY_NAME = "libdpitunnel-cli.so"
     const val DPITUNNEL_DAEMON_PID_FILE = "/dev/dpitunnel-cli-daemon.pid"
     const val INBUILT_CA_BUNDLE_FILE_NAME = "ca.bundle"
