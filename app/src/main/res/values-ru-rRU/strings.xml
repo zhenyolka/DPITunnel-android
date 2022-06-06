@@ -135,6 +135,10 @@
     <string name="preference_ca_bundle_path_title">Импортировать CA Bundle</string>
     <!-- Proxy -->
     <string name="preference_category_server">Прокси</string>
+    <string name="preference_proxy_mode_title">Тип прокси</string>
+    <string name="preference_proxy_mode_summary">HTTP применяется в основном для браузера. Прозрачный для всех приложений, использующих HTTP/HTTPS</string>
+    <string name="preference_proxy_mode_http_title">HTTP</string>
+    <string name="preference_proxy_mode_transparent_title">Прозрачный</string>
     <string name="preference_proxy_system_wide_title">Общесистемные прокси</string>
     <string name="preference_proxy_system_wide_summary">Устанавливает прокси для всей системы. Выключите, если хотите создавать цепочки прокси</string>
     <string name="preference_proxy_ip_title">IP прокси</string>

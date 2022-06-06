@@ -4,6 +4,7 @@ import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import ru.evgeniy.dpitunnelcli.domain.entities.Profile
+import ru.evgeniy.dpitunnelcli.domain.entities.ProxyMode
 import ru.evgeniy.dpitunnelcli.domain.usecases.DaemonState
 
 class CliDaemon(private val execPath: String,
@@ -42,7 +43,8 @@ class CliDaemon(private val execPath: String,
         val caBundlePath: String,
         val ip: String?,
         val port: Int?,
-        val customIPsPath: String?
+        val customIPsPath: String?,
+        val proxyMode: ProxyMode
     ) {
         override fun toString(): String {
             val stringBuilder = StringBuilder()
@@ -50,6 +52,11 @@ class CliDaemon(private val execPath: String,
             ip?.let { stringBuilder.append(" --ip $it") }
             port?.let { stringBuilder.append(" --port $it") }
             customIPsPath?.let { stringBuilder.append(" --custom-ips \"$it\"") }
+            stringBuilder.append(" --mode ")
+            when(proxyMode) {
+                ProxyMode.HTTP -> { stringBuilder.append("proxy") }
+                ProxyMode.TRANSPARENT -> { stringBuilder.append("transparent") }
+            }
             return stringBuilder.toString()
         }
     }

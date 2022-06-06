@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import ru.evgeniy.dpitunnelcli.R
+import ru.evgeniy.dpitunnelcli.domain.entities.ProxyMode
 import ru.evgeniy.dpitunnelcli.utils.Constants
 import java.io.File
 
@@ -22,6 +23,15 @@ class AppPreferences private  constructor() {
             }
         }
         get() = sharedPreferences.getString(CA_BUNDLE_PROPERTY_NAME, "")?.ifEmpty { null }
+
+    val proxyMode: ProxyMode?
+        get() = sharedPreferences.getString(PROXY_MODE_PROPERTY_NAME, "")?.ifEmpty { null }?.let { mode->
+            when(mode) {
+                "http" -> ProxyMode.HTTP
+                "transparent" -> ProxyMode.TRANSPARENT
+                else -> null
+            }
+        }
 
     val systemWide: Boolean
         get() = sharedPreferences.getBoolean(SYSTEM_WIDE_PROXY_PROPERTY_NAME, false)
@@ -63,6 +73,7 @@ class AppPreferences private  constructor() {
         const val SETTINGS_STORAGE_NAME = "PERSISTENT_SETTINGS"
         private const val START_ON_BOOT_PROPERTY_NAME = "preference_start_on_boot"
         private const val CA_BUNDLE_PROPERTY_NAME = "preference_ca_bundle_path"
+        private const val PROXY_MODE_PROPERTY_NAME = "preference_proxy_mode"
         private const val SYSTEM_WIDE_PROXY_PROPERTY_NAME = "preference_proxy_system_wide"
         private const val IP_PROPERTY_NAME = "preference_proxy_ip"
         private const val PORT_PROPERTY_NAME = "preference_proxy_port"

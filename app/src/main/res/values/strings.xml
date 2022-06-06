@@ -136,6 +136,10 @@
     <string name="preference_ca_bundle_path_title">Import CA Bundle</string>
     <!-- Proxy -->
     <string name="preference_category_server">Proxy</string>
+    <string name="preference_proxy_mode_title">Proxy mode</string>
+    <string name="preference_proxy_mode_summary">HTTP mode works mainly for browser. Transparent for all apps using HTTP/HTTPS</string>
+    <string name="preference_proxy_mode_http_title">HTTP</string>
+    <string name="preference_proxy_mode_transparent_title">Transparent</string>
     <string name="preference_proxy_system_wide_title">System wide proxy</string>
     <string name="preference_proxy_system_wide_summary">DPITunnel proxy for all system. Disable if you want to make proxy chains</string>
     <string name="preference_proxy_ip_title">Proxy IP</string>

@@ -26,6 +26,15 @@
 
     <PreferenceCategory app:title="@string/preference_category_server">
 
+        <ListPreference
+            app:key="preference_proxy_mode"
+            app:defaultValue="transparent"
+            app:entries="@array/proxy_mode_titles"
+            app:entryValues="@array/proxy_mode_values"
+            app:singleLineTitle="false"
+            app:title="@string/preference_proxy_mode_title"
+            app:summary="@string/preference_proxy_mode_summary" />
+
         <SwitchPreferenceCompat
             app:key="preference_proxy_system_wide"
             app:defaultValue="true"

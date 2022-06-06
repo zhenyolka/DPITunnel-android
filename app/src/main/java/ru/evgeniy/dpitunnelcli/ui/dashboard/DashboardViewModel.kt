@@ -35,13 +35,13 @@ class DashboardViewModel(private val daemonUseCase: IDaemonUseCase,
                         _uiState.postValue(UIState.Running)
                         if (lastDaemonState is DaemonState.Stopped || lastDaemonState is DaemonState.Error)
                             if (settingsUseCase.getSystemWide())
-                                proxyUseCase.set("127.0.0.1", settingsUseCase.getPort() ?: Constants.DPITUNNEL_DEFAULT_PORT)
+                                proxyUseCase.set("127.0.0.1", settingsUseCase.getPort() ?: Constants.DPITUNNEL_DEFAULT_PORT, settingsUseCase.getProxyMode()!!)
                     }
                     is DaemonState.Stopped -> {
                         _uiState.postValue(UIState.Stopped)
                         if (lastDaemonState is DaemonState.Running)
                             if (settingsUseCase.getSystemWide())
-                                proxyUseCase.unset()
+                                proxyUseCase.unset(settingsUseCase.getProxyMode()!!)
                     }
                     is DaemonState.Error -> {
                         _uiState.postValue(UIState.Stopped)
@@ -71,7 +71,8 @@ class DashboardViewModel(private val daemonUseCase: IDaemonUseCase,
                                 caBundlePath = settingsUseCase.getCABundlePath()!!,
                                 ip = settingsUseCase.getIP(),
                                 port = settingsUseCase.getPort(),
-                                customIPsPath = settingsUseCase.getCustomIPsPath()
+                                customIPsPath = settingsUseCase.getCustomIPsPath(),
+                                proxyMode = settingsUseCase.getProxyMode()!!
                             ),
                             it
                         )
@@ -102,7 +103,8 @@ class DashboardViewModel(private val daemonUseCase: IDaemonUseCase,
                                 caBundlePath = settingsUseCase.getCABundlePath()!!,
                                 ip = settingsUseCase.getIP(),
                                 port = settingsUseCase.getPort(),
-                                customIPsPath = settingsUseCase.getCustomIPsPath()
+                                customIPsPath = settingsUseCase.getCustomIPsPath(),
+                                proxyMode = settingsUseCase.getProxyMode()!!
                             ),
                             it
                         )
