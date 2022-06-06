@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import ru.evgeniy.dpitunnelcli.domain.entities.CustomIPEntry
 import ru.evgeniy.dpitunnelcli.domain.usecases.ILoadCustomIPsUseCase
 import ru.evgeniy.dpitunnelcli.domain.usecases.ISaveCustomIPsUseCase
+import java.io.InputStream
 
 class CustomIPsViewModel(val loadCustomIPsUseCase: ILoadCustomIPsUseCase,
                          val saveCustomIPsUseCase: ISaveCustomIPsUseCase
@@ -24,6 +25,17 @@ class CustomIPsViewModel(val loadCustomIPsUseCase: ILoadCustomIPsUseCase,
 
     init {
         _entriesList = loadCustomIPsUseCase.load().toMutableList()
+        _entries.postValue(_entriesList)
+    }
+
+    fun import(stream: InputStream) {
+        val entryList = mutableListOf<CustomIPEntry>()
+        stream.bufferedReader().forEachLine { line ->
+            val splitted = line.split(' ')
+            entryList.add(CustomIPEntry(splitted.first(), splitted.last()))
+        }
+        _entriesList = entryList
+        isModified = true
         _entries.postValue(_entriesList)
     }
 

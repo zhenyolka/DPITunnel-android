@@ -1,5 +1,6 @@
 package ru.evgeniy.dpitunnelcli.ui.activity.customIPs
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.text.InputType
 import android.view.Menu
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,7 +18,6 @@ import ru.evgeniy.dpitunnelcli.data.usecases.SaveCustomIPsUseCase
 import ru.evgeniy.dpitunnelcli.databinding.ActivityCustomIpsBinding
 import ru.evgeniy.dpitunnelcli.domain.entities.CustomIPEntry
 import ru.evgeniy.dpitunnelcli.utils.Utils
-
 class CustomIPsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCustomIpsBinding
@@ -26,6 +27,16 @@ class CustomIPsActivity : AppCompatActivity() {
             loadCustomIPsUseCase = LoadCustomIPsUseCase(this),
             saveCustomIPsUseCase = SaveCustomIPsUseCase(this)
         )
+    }
+
+    private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            result?.data?.data?.also { uri ->
+                this.contentResolver.openInputStream(uri)?.let {
+                    customIPsViewModel.import(it)
+                }
+            }
+        }
     }
 
     override fun onBackPressed() {
@@ -57,6 +68,13 @@ class CustomIPsActivity : AppCompatActivity() {
             when(it.itemId) {
                 R.id.custom_ips_toolbar_menu_save -> {
                     customIPsViewModel.save()
+                    true
+                }
+                R.id.custom_ips_toolbar_menu_import -> {
+                    val intent = Intent(Intent.ACTION_GET_CONTENT)
+                    intent.addCategory(Intent.CATEGORY_OPENABLE)
+                    intent.type = "*/*"
+                    resultLauncher.launch(intent)
                     true
                 }
                 else -> false

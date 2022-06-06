@@ -110,6 +110,7 @@
     <!-- Custom IPs activity -->
     <!-- Toolbar -->
     <string name="save_custom_ips_toolbar">Save</string>
+    <string name="import_custom_ips_toolbar">Import</string>
     <!-- Dialogs -->
     <string name="dialog_custom_ip_edit_domain_positive">OK</string>
     <string name="dialog_custom_ip_edit_domain_negative">Cancel</string>

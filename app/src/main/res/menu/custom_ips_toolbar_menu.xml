@@ -8,4 +8,10 @@
         android:title="@string/save_custom_ips_toolbar"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/custom_ips_toolbar_menu_import"
+        android:icon="@drawable/ic_import_export_24dp"
+        android:title="@string/import_custom_ips_toolbar"
+        app:showAsAction="ifRoom" />
+
 </menu>
