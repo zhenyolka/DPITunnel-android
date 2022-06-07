@@ -74,12 +74,14 @@ class DashboardFragment : Fragment() {
         dashboardViewModel.uiState.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is DashboardViewModel.UIState.Loading -> {
+                    buttonSettings.isEnabled = true
                     progressBarLoading.visibility = View.VISIBLE
                     imageViewStatus.visibility = View.INVISIBLE
                     buttonStartStop.isClickable = false
                     buttonRestart.isClickable = false
                 }
                 is DashboardViewModel.UIState.Running -> {
+                    buttonSettings.isEnabled = false
                     progressBarLoading.visibility = View.GONE
                     imageViewStatus.visibility = View.VISIBLE
                     imageViewStatus.setImageDrawable(AppCompatResources.getDrawable(requireContext().applicationContext, R.drawable.ic_check_circle_white_96dp))
@@ -90,6 +92,7 @@ class DashboardFragment : Fragment() {
                     buttonRestart.isClickable = true
                 }
                 is DashboardViewModel.UIState.Stopped -> {
+                    buttonSettings.isEnabled = true
                     progressBarLoading.visibility = View.GONE
                     imageViewStatus.visibility = View.VISIBLE
                     imageViewStatus.setImageDrawable(AppCompatResources.getDrawable(requireContext().applicationContext, R.drawable.ic_cancel_white_96dp))
