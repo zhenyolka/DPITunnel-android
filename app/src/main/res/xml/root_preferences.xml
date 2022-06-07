@@ -28,7 +28,7 @@
 
         <ListPreference
             app:key="preference_proxy_mode"
-            app:defaultValue="transparent"
+            app:defaultValue="http"
             app:entries="@array/proxy_mode_titles"
             app:entryValues="@array/proxy_mode_values"
             app:singleLineTitle="false"
