@@ -33,6 +33,24 @@ class AppPreferences private  constructor() {
             }
         }
 
+    var proxifiedApps: List<String>
+        set(value) {
+            value.let { list ->
+                val usernames = StringBuffer()
+                list.forEach {
+                    usernames.append("$it|")
+                }
+                usernames.removeSuffix("|")
+
+                with(sharedPreferences.edit()){
+                    putString(PROXIFIED_APPS_PROPERTY_NAME, usernames.toString())
+                    apply()
+                }
+            }
+        }
+        get() = sharedPreferences.getString(PROXIFIED_APPS_PROPERTY_NAME, "")?.ifEmpty { null }
+            ?.split('|') ?: listOf()
+
     val systemWide: Boolean
         get() = sharedPreferences.getBoolean(SYSTEM_WIDE_PROXY_PROPERTY_NAME, false)
 
@@ -74,6 +92,7 @@ class AppPreferences private  constructor() {
         private const val START_ON_BOOT_PROPERTY_NAME = "preference_start_on_boot"
         private const val CA_BUNDLE_PROPERTY_NAME = "preference_ca_bundle_path"
         private const val PROXY_MODE_PROPERTY_NAME = "preference_proxy_mode"
+        private const val PROXIFIED_APPS_PROPERTY_NAME = "preference_proxified_apps"
         private const val SYSTEM_WIDE_PROXY_PROPERTY_NAME = "preference_proxy_system_wide"
         private const val IP_PROPERTY_NAME = "preference_proxy_ip"
         private const val PORT_PROPERTY_NAME = "preference_proxy_port"

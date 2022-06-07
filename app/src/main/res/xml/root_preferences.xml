@@ -35,6 +35,12 @@
             app:title="@string/preference_proxy_mode_title"
             app:summary="@string/preference_proxy_mode_summary" />
 
+        <Preference
+            app:key="preference_proxified_apps"
+            app:singleLineTitle="false"
+            app:title="@string/preference_proxified_apps_title"
+            app:summary="@string/preference_proxified_apps_summary" />
+
         <SwitchPreferenceCompat
             app:key="preference_proxy_system_wide"
             app:defaultValue="true"

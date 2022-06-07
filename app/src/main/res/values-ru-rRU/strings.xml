@@ -7,6 +7,7 @@
     <string name="title_activity_edit_profile">Добавить профиль</string>
     <string name="title_activity_settings">Настройки</string>
     <string name="title_activity_custom_ips">Переопределение IP</string>
+    <string name="title_activity_proxified_apps">Выбор приложений</string>
 
     <!-- Tile -->
     <string name="tile_enable_disable">DPI Tunnel</string>
@@ -106,6 +107,16 @@
     <string name="config_parse_failed">Ошибка! Не удалось разобрать вывод программы. Свяжитесь с разработчиком</string>
     <string name="profile_successfully_configured">Настройки успешно подобраны</string>
 
+    <!-- Proxified apps activity -->
+    <!-- Toolbar -->
+    <string name="save_proxified_apps_toolbar">Сохранить</string>
+    <!-- Exit confirmation dialog -->
+    <string name="title_confirmation_proxified_apps_dialog">Несохранённые изменения</string>
+    <string name="message_confirmation_proxified_apps_dialog">Сохранить?</string>
+    <string name="save_confirmation_proxified_apps_dialog">Сохранить</string>
+    <string name="discard_confirmation_proxified_apps_dialog">Не сохранять</string>
+    <string name="cancel_confirmation_proxified_apps_dialog">Отменить</string>
+
     <!-- Custom IPs activity -->
     <!-- Toolbar -->
     <string name="save_custom_ips_toolbar">Сохранить</string>
@@ -140,6 +151,8 @@
     <string name="preference_proxy_mode_summary">HTTP применяется в основном для браузера. Прозрачный для всех приложений, использующих HTTP/HTTPS</string>
     <string name="preference_proxy_mode_http_title">HTTP</string>
     <string name="preference_proxy_mode_transparent_title">Прозрачный</string>
+    <string name="preference_proxified_apps_title">Выбор приложений</string>
+    <string name="preference_proxified_apps_summary">Приложения, трафик которых будет обрабатываться DPITunnel. Поддерживается только прозрачный режим</string>
     <string name="preference_proxy_system_wide_title">Общесистемные прокси</string>
     <string name="preference_proxy_system_wide_summary">Устанавливает прокси для всей системы. Выключите, если хотите создавать цепочки прокси</string>
     <string name="preference_proxy_ip_title">IP прокси</string>

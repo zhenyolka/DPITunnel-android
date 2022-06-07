@@ -9,14 +9,11 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import ru.evgeniy.dpitunnelcli.R
-import ru.evgeniy.dpitunnelcli.data.usecases.DaemonUseCase
-import ru.evgeniy.dpitunnelcli.data.usecases.FetchAllProfilesUseCase
-import ru.evgeniy.dpitunnelcli.data.usecases.ProxyUseCase
-import ru.evgeniy.dpitunnelcli.data.usecases.SettingsUseCase
 import ru.evgeniy.dpitunnelcli.databinding.FragmentDashboardBinding
 import ru.evgeniy.dpitunnelcli.utils.Constants
 import android.content.Intent
 import android.widget.Toast
+import ru.evgeniy.dpitunnelcli.data.usecases.*
 import ru.evgeniy.dpitunnelcli.ui.activity.settings.SettingsActivity
 
 
@@ -35,7 +32,8 @@ class DashboardFragment : Fragment() {
                 pidFilePath = Constants.DPITUNNEL_DAEMON_PID_FILE),
             fetchAllProfilesUseCase = FetchAllProfilesUseCase(requireContext().applicationContext),
             settingsUseCase = SettingsUseCase(requireContext().applicationContext),
-            proxyUseCase = ProxyUseCase()
+            proxyUseCase = ProxyUseCase(),
+            loadProxifiedAppsUseCase = LoadProxifiedAppsUseCase(requireContext().applicationContext)
         )
     }
 

@@ -9,10 +9,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import ru.evgeniy.dpitunnelcli.R
 import ru.evgeniy.dpitunnelcli.cli.CliDaemon
-import ru.evgeniy.dpitunnelcli.data.usecases.DaemonUseCase
-import ru.evgeniy.dpitunnelcli.data.usecases.FetchAllProfilesUseCase
-import ru.evgeniy.dpitunnelcli.data.usecases.ProxyUseCase
-import ru.evgeniy.dpitunnelcli.data.usecases.SettingsUseCase
+import ru.evgeniy.dpitunnelcli.data.usecases.*
 import ru.evgeniy.dpitunnelcli.domain.usecases.*
 import ru.evgeniy.dpitunnelcli.utils.Constants
 
@@ -26,6 +23,7 @@ class SwitchTileService: TileService() {
     private lateinit var settingsUseCase: ISettingsUseCase
     private lateinit var daemonUseCase: IDaemonUseCase
     private lateinit var proxyUseCase: IProxyUseCase
+    private lateinit var loadProxifiedAppsUseCase: ILoadProxifiedAppsUseCase
 
     override fun onCreate() {
         super.onCreate()
@@ -35,6 +33,7 @@ class SwitchTileService: TileService() {
             execPath = this.applicationInfo.nativeLibraryDir + '/' + Constants.DPITUNNEL_BINARY_NAME,
             pidFilePath = Constants.DPITUNNEL_DAEMON_PID_FILE)
         proxyUseCase = ProxyUseCase()
+        loadProxifiedAppsUseCase = LoadProxifiedAppsUseCase(this)
     }
 
     override fun onStartListening() {
@@ -48,7 +47,9 @@ class SwitchTileService: TileService() {
                         is DaemonState.Running -> {
                             if (lastDaemonState is DaemonState.Stopped || lastDaemonState is DaemonState.Error)
                                 if (settingsUseCase.getSystemWide())
-                                    proxyUseCase.set("127.0.0.1", settingsUseCase.getPort() ?: Constants.DPITUNNEL_DEFAULT_PORT, settingsUseCase.getProxyMode() ?: Constants.DPITUNNEL_DEFAULT_PROXY_MODE)
+                                    proxyUseCase.set("127.0.0.1", settingsUseCase.getPort() ?: Constants.DPITUNNEL_DEFAULT_PORT,
+                                        settingsUseCase.getProxyMode() ?: Constants.DPITUNNEL_DEFAULT_PROXY_MODE,
+                                        loadProxifiedAppsUseCase.load())
                         }
                         is DaemonState.Stopped -> {
                             if (lastDaemonState is DaemonState.Running)

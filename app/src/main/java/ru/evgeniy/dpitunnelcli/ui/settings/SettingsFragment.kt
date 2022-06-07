@@ -13,6 +13,7 @@ import androidx.preference.SwitchPreferenceCompat
 import ru.evgeniy.dpitunnelcli.R
 import ru.evgeniy.dpitunnelcli.preferences.AppPreferences
 import ru.evgeniy.dpitunnelcli.ui.activity.customIPs.CustomIPsActivity
+import ru.evgeniy.dpitunnelcli.ui.activity.proxifiedApps.ProxifiedAppsActivity
 import ru.evgeniy.dpitunnelcli.utils.Constants
 import ru.evgeniy.dpitunnelcli.utils.MinMaxFilter
 import ru.evgeniy.dpitunnelcli.utils.Utils
@@ -42,6 +43,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
             intent.addCategory(Intent.CATEGORY_OPENABLE)
             intent.type = "*/*"
             resultLauncher.launch(intent)
+            true
+        }
+
+        val proxifiedApps = findPreference<Preference>("preference_proxified_apps")
+        proxifiedApps!!.setOnPreferenceClickListener {
+            resultLauncher.launch(Intent(context, ProxifiedAppsActivity::class.java))
             true
         }
 
@@ -79,6 +86,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     AppPreferences.getInstance(requireContext()).caBundlePath = userCABundlePath
                 } catch (exception: FileNotFoundException) { }
             }
+        }
+    }
+
+    private val resultLauncherProxifiedApps = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+
         }
     }
 }

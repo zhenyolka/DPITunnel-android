@@ -2,24 +2,24 @@ package ru.evgeniy.dpitunnelcli.ui.dashboard
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import ru.evgeniy.dpitunnelcli.domain.usecases.IDaemonUseCase
-import ru.evgeniy.dpitunnelcli.domain.usecases.IFetchAllProfilesUseCase
-import ru.evgeniy.dpitunnelcli.domain.usecases.IProxyUseCase
-import ru.evgeniy.dpitunnelcli.domain.usecases.ISettingsUseCase
+import ru.evgeniy.dpitunnelcli.domain.usecases.*
 
 class DashboardViewModelFactory(val daemonUseCase: IDaemonUseCase,
                                 val fetchAllProfilesUseCase: IFetchAllProfilesUseCase,
                                 val settingsUseCase: ISettingsUseCase,
-                                val proxyUseCase: IProxyUseCase
+                                val proxyUseCase: IProxyUseCase,
+                                val loadProxifiedAppsUseCase: ILoadProxifiedAppsUseCase
 ): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return modelClass.getConstructor(IDaemonUseCase::class.java,
             IFetchAllProfilesUseCase::class.java,
             ISettingsUseCase::class.java,
-            IProxyUseCase::class.java)
+            IProxyUseCase::class.java,
+            ILoadProxifiedAppsUseCase::class.java)
             .newInstance(daemonUseCase,
                 fetchAllProfilesUseCase,
                 settingsUseCase,
-                proxyUseCase)
+                proxyUseCase,
+                loadProxifiedAppsUseCase)
     }
 }

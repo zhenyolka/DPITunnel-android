@@ -60,6 +60,11 @@
         </service>
 
         <activity
+            android:name=".ui.activity.proxifiedApps.ProxifiedAppsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_proxified_apps"
+            android:theme="@style/Theme.DPITunnelcli" />
+        <activity
             android:name=".ui.activity.customIPs.CustomIPsActivity"
             android:exported="false"
             android:label="@string/title_activity_custom_ips"
@@ -86,5 +91,10 @@
             </intent-filter>
         </activity>
     </application>
-
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
 </manifest>

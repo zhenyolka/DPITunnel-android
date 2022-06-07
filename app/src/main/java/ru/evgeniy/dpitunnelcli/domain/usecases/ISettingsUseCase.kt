@@ -6,6 +6,8 @@ interface ISettingsUseCase {
     fun getStartOnBoot(): Boolean
     fun getCABundlePath(): String?
     fun getProxyMode(): ProxyMode?
+    fun getProxifiedApps(): List<String>
+    fun setProxifiedApps(value: List<String>)
     fun getSystemWide(): Boolean
     fun getIP(): String?
     fun getPort(): Int?

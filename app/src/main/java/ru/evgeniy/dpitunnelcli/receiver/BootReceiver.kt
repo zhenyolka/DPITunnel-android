@@ -8,10 +8,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withTimeoutOrNull
 import ru.evgeniy.dpitunnelcli.cli.CliDaemon
-import ru.evgeniy.dpitunnelcli.data.usecases.DaemonUseCase
-import ru.evgeniy.dpitunnelcli.data.usecases.FetchAllProfilesUseCase
-import ru.evgeniy.dpitunnelcli.data.usecases.ProxyUseCase
-import ru.evgeniy.dpitunnelcli.data.usecases.SettingsUseCase
+import ru.evgeniy.dpitunnelcli.data.usecases.*
 import ru.evgeniy.dpitunnelcli.domain.usecases.DaemonState
 import ru.evgeniy.dpitunnelcli.utils.Constants
 import ru.evgeniy.dpitunnelcli.utils.goAsync
@@ -25,6 +22,7 @@ class BootReceiver: BroadcastReceiver() {
                 val fetchAllProfilesUseCase = FetchAllProfilesUseCase(context)
                 val settingsUseCase = SettingsUseCase(context)
                 val proxyUseCase = ProxyUseCase()
+                val loadProxifiedAppsUseCase = LoadProxifiedAppsUseCase(context)
                 if (settingsUseCase.getStartOnBoot()) {
                     daemonUseCase.start(
                         CliDaemon.PersistentOptions(
@@ -50,7 +48,9 @@ class BootReceiver: BroadcastReceiver() {
                     }
                     if (settingsUseCase.getSystemWide()) {
                         if (isStarted)
-                            proxyUseCase.set("127.0.0.1", settingsUseCase.getPort() ?: Constants.DPITUNNEL_DEFAULT_PORT, settingsUseCase.getProxyMode() ?: Constants.DPITUNNEL_DEFAULT_PROXY_MODE)
+                            proxyUseCase.set("127.0.0.1", settingsUseCase.getPort() ?: Constants.DPITUNNEL_DEFAULT_PORT,
+                                settingsUseCase.getProxyMode() ?: Constants.DPITUNNEL_DEFAULT_PROXY_MODE,
+                                loadProxifiedAppsUseCase.load())
                         else
                             proxyUseCase.unset(settingsUseCase.getProxyMode() ?: Constants.DPITUNNEL_DEFAULT_PROXY_MODE)
                     }

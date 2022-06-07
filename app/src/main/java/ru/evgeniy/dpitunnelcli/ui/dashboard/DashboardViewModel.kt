@@ -17,6 +17,7 @@ class DashboardViewModel(private val daemonUseCase: IDaemonUseCase,
                          private val fetchAllProfilesUseCase: IFetchAllProfilesUseCase,
                          private val settingsUseCase: ISettingsUseCase,
                          private val proxyUseCase: IProxyUseCase,
+                         private val loadProxifiedAppsUseCase: ILoadProxifiedAppsUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableLiveData<UIState>()
@@ -35,7 +36,9 @@ class DashboardViewModel(private val daemonUseCase: IDaemonUseCase,
                         _uiState.postValue(UIState.Running)
                         if (lastDaemonState is DaemonState.Stopped || lastDaemonState is DaemonState.Error)
                             if (settingsUseCase.getSystemWide())
-                                proxyUseCase.set("127.0.0.1", settingsUseCase.getPort() ?: Constants.DPITUNNEL_DEFAULT_PORT, settingsUseCase.getProxyMode() ?: Constants.DPITUNNEL_DEFAULT_PROXY_MODE)
+                                proxyUseCase.set("127.0.0.1", settingsUseCase.getPort() ?: Constants.DPITUNNEL_DEFAULT_PORT,
+                                    settingsUseCase.getProxyMode() ?: Constants.DPITUNNEL_DEFAULT_PROXY_MODE,
+                                    loadProxifiedAppsUseCase.load())
                     }
                     is DaemonState.Stopped -> {
                         _uiState.postValue(UIState.Stopped)
