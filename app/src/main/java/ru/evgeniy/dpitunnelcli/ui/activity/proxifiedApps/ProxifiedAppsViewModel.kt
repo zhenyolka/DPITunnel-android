@@ -3,6 +3,9 @@ package ru.evgeniy.dpitunnelcli.ui.activity.proxifiedApps
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import ru.evgeniy.dpitunnelcli.domain.entities.ProxifiedApp
 import ru.evgeniy.dpitunnelcli.domain.usecases.ILoadProxifiedAppsUseCase
 import ru.evgeniy.dpitunnelcli.domain.usecases.ISaveProxifiedAppsUseCase
@@ -11,7 +14,7 @@ class ProxifiedAppsViewModel(private val loadProxifiedAppsUseCase: ILoadProxifie
                              private val saveProxifiedAppsUseCase: ISaveProxifiedAppsUseCase
 ) : ViewModel() {
 
-    private var _appsList: MutableList<ProxifiedApp>
+    private lateinit var _appsList: MutableList<ProxifiedApp>
 
     private val _apps = MutableLiveData<List<ProxifiedApp>>()
     val apps: LiveData<List<ProxifiedApp>> = _apps
@@ -25,8 +28,10 @@ class ProxifiedAppsViewModel(private val loadProxifiedAppsUseCase: ILoadProxifie
         }
 
     init {
-        _appsList = loadProxifiedAppsUseCase.load().toMutableList()
-        _apps.postValue(_appsList)
+        viewModelScope.launch (Dispatchers.IO) {
+            _appsList = loadProxifiedAppsUseCase.load().toMutableList()
+            _apps.postValue(_appsList)
+        }
     }
 
     fun checkAll() {
@@ -50,13 +55,14 @@ class ProxifiedAppsViewModel(private val loadProxifiedAppsUseCase: ILoadProxifie
     }
 
     fun save() {
-        saveProxifiedAppsUseCase.save(_appsList)
-        _uiState.value = UIState.Finish
+        viewModelScope.launch (Dispatchers.IO) {
+            saveProxifiedAppsUseCase.save(_appsList)
+            _uiState.postValue(UIState.Finish)
+        }
     }
 
     fun saveUnsaved() {
         save()
-        _uiState.value = UIState.Finish
     }
 
     fun discardUnsaved() {
