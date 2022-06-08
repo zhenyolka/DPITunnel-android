@@ -25,7 +25,7 @@ class LoadProxifiedAppsUseCase(context: Context): ILoadProxifiedAppsUseCase {
                 )
             )
         }
-        list.sortBy { it.name }
+        list.sortWith(compareBy({ !it.isProxified }, { it.name }))
         return list.toList()
     }
 }
