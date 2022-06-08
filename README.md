@@ -29,6 +29,8 @@ DPI Tunnel uses desync attacks to fool DPI filters
 * Create profiles for different ISP and automatically change them when switch connection
 * Auto start program on device boot
 * Easily auto configure for your ISP
+* Choose apps, which traffic handle
+* Specify working IPs for huge blocked resources (Google, Facebook, Instagram)
 
 ## Configuring
 For the most of ISPs you do not need any configuration. Just press start button.
