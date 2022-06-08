@@ -67,7 +67,7 @@ class CustomIPsActivity : AppCompatActivity() {
         binding.customIpsToolbar.setOnMenuItemClickListener {
             when(it.itemId) {
                 R.id.custom_ips_toolbar_menu_save -> {
-                    customIPsViewModel.save()
+                    customIPsViewModel.saveUnsaved()
                     true
                 }
                 R.id.custom_ips_toolbar_menu_import -> {
