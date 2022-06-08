@@ -41,7 +41,7 @@ class ProxyUseCase: IProxyUseCase {
         private const val CMD_IPTABLES_RESET = "iptables -t nat -F OUTPUT"
         // Disable IPv6 as DPITunnel don't support it
         // Without this blocked sites that supports IPv6 won't be processed in transparent mode
-        private const val CMD_DISABLE_IPV6 = "echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6"
-        private const val CMD_ENABLE_IPV6 = "echo 0 > /proc/sys/net/ipv6/conf/all/disable_ipv6"
+        private const val CMD_DISABLE_IPV6 = "ip6tables -A OUTPUT -j REJECT"
+        private const val CMD_ENABLE_IPV6 = "ip6tables -D OUTPUT -j REJECT"
     }
 }
